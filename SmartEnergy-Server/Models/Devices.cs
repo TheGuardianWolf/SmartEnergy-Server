@@ -11,7 +11,7 @@ namespace SmartEnergy_Server.Models
         public int Id { get; set; }
 
         [JsonIgnore]
-        public virtual Users User { get; set; }
+        public virtual ICollection<Users> User { get; set; }
 
     }
 }
