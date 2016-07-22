@@ -491,5 +491,10 @@
             Gets a list of users.
             </summary>
         </member>
+        <member name="T:SmartEnergy_Server.Models.Users">
+            <summary>
+            A set of endpoints relating to user data.
+            </summary>
+        </member>
     </members>
 </doc>
