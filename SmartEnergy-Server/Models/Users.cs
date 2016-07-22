@@ -6,6 +6,9 @@ using System.Web;
 
 namespace SmartEnergy_Server.Models
 {
+    /// <summary>
+    /// A set of endpoints relating to user data.
+    /// </summary>
     public class Users
     {
         public int Id { get; set; }

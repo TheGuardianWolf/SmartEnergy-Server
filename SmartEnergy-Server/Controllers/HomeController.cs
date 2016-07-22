@@ -10,7 +10,7 @@ namespace SmartEnergy_Server.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "SmartEnergy Server";
 
             return View();
         }

@@ -6,7 +6,7 @@
 @model Collection<ApiDescription>
 
 @{
-    ViewBag.Title = "ASP.NET Web API Help Page";
+    ViewBag.Title = "SmartEnergy Web API Help";
 
     // Group APIs by controller
     ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
@@ -25,7 +25,7 @@
         <div class="content-wrapper">
             <h2>Introduction</h2>
             <p>
-                Provide a general description of your APIs here.
+                A list of endpoints along with descriptions are provided below. For testing purposes, please use the <a href="/swagger">Swagger</a> interface.
             </p>
         </div>
     </section>

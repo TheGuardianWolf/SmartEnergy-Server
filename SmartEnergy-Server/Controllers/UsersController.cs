@@ -12,10 +12,16 @@ using SmartEnergy_Server.Models;
 
 namespace SmartEnergy_Server.Controllers
 {
+    /// <summary>
+    /// A set of endpoints relating to user data.
+    /// </summary>
     public class UsersController : ApiController
     {
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
+        /// <summary>
+        /// Gets a list of users.
+        /// </summary>
         // GET: api/Users
         public IQueryable<Users> GetUsers()
         {
