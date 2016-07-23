@@ -26,11 +26,13 @@ namespace SmartEnergy_Server.Models
             public DbConfiguration()
             {
                 this.AutomaticMigrationsEnabled = true;
+                this.AutomaticMigrationDataLossAllowed = true;
             }
         }
 
-        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.Users> Users { get; set; }
-        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.Devices> Devices { get; set; }
+        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.User> User { get; set; }
+        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.Device> Device { get; set; }
         public System.Data.Entity.DbSet<SmartEnergy_Server.Models.Data> Data { get; set; }
+        public IQueryable<Device> Devices { get; internal set; }
     }
 }

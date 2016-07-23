@@ -35,6 +35,21 @@ namespace SmartEnergy_Server.Controllers
             return Ok(data);
         }
 
+        // GET: api/Data/Device/5
+        [Route("api/Data/Device/{deviceId}")]
+        [ResponseType(typeof(Data))]
+        public IHttpActionResult GetDataByDeviceId(int deviceId)
+        {
+            var data = db.Data.Where(i => i.DeviceId == deviceId);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(data);
+        }
+
         // PUT: api/Data/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutData(int id, Data data)
@@ -48,6 +63,8 @@ namespace SmartEnergy_Server.Controllers
             {
                 return BadRequest();
             }
+
+            // TODO: Input should contain nested JSON object for time and power which is looped over and inserted to DB
 
             db.Entry(data).State = EntityState.Modified;
 
@@ -113,6 +130,11 @@ namespace SmartEnergy_Server.Controllers
         private bool DataExists(int id)
         {
             return db.Data.Count(e => e.Id == id) > 0;
+        }
+
+        private bool TimeExists(DateTime time)
+        {
+            return db.Data.Count(e => e.Time == time) > 0;
         }
     }
 }

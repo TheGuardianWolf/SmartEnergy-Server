@@ -23,19 +23,36 @@ namespace SmartEnergy_Server.Controllers
         /// <summary>
         /// Get an object containing all users and their details.
         /// </summary>
-        public IQueryable<Users> GetUsers()
+        public IQueryable<User> GetUser()
         {
-            return db.Users;
+            return db.User;
         }
 
         // GET: api/Users/5
         /// <summary>
         /// Get details for user by user table ID.
         /// </summary>
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult GetUsers(int id)
+        [ResponseType(typeof(User))]
+        public IHttpActionResult GetUser(int id)
         {
-            Users users = db.Users.Find(id);
+            User users = db.User.Find(id);
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
+        }
+
+        // GET: api/Users/Username
+        /// <summary>
+        /// Get details on specific user by username. Can be used for user validation.
+        /// </summary>
+        [Route("api/Users/Username/{username}")]
+        [ResponseType(typeof(User))]
+        public IHttpActionResult GetUser(string username)
+        {
+            var users = db.User.Where(i => i.Username == username);
             if (users == null)
             {
                 return NotFound();
@@ -49,19 +66,24 @@ namespace SmartEnergy_Server.Controllers
         /// Modify user entry.
         /// </summary>
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUsers(int id, Users users)
+        public IHttpActionResult PutUser(int id, User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != users.Id)
+            if (id != user.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(users).State = EntityState.Modified;
+            if (UsernameExists(user.Username))
+            {
+                return BadRequest("User already exists.");
+            }
+
+            db.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +91,7 @@ namespace SmartEnergy_Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UsersExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -86,57 +108,40 @@ namespace SmartEnergy_Server.Controllers
         /// <summary>
         /// Create a user.
         /// </summary>
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult PostUsers(Users users)
+        [ResponseType(typeof(User))]
+        public IHttpActionResult PostUser(User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (UsernameExists(users.Username))
+            if (UsernameExists(user.Username))
             {
                 return BadRequest("User already exists.");
             }
 
-            db.Users.Add(users);
+            db.User.Add(user);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = users.Id }, users);
+            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
         }
 
         // DELETE: api/Users/5
         /// <summary>
         /// Delete a user.
         /// </summary>
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult DeleteUsers(int id)
+        [ResponseType(typeof(User))]
+        public IHttpActionResult DeleteUser(int id)
         {
-            Users users = db.Users.Find(id);
+            User users = db.User.Find(id);
             if (users == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(users);
+            db.User.Remove(users);
             db.SaveChanges();
-
-            return Ok(users);
-        }
-
-        // GET: api/Users/Username
-        /// <summary>
-        /// Get details on specific user by username. Can be used for user validation.
-        /// </summary>
-        [Route("api/Users/{username}")]
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult GetUsers(string username)
-        {
-            var users = db.Users.Where(i => i.Username == username);
-            if (users == null)
-            {
-                return NotFound();
-            }
 
             return Ok(users);
         }
@@ -150,14 +155,14 @@ namespace SmartEnergy_Server.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UsersExists(int id)
+        private bool UserExists(int id)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            return db.User.Count(e => e.Id == id) > 0;
         }
 
         private bool UsernameExists(string username)
         {
-            return db.Users.Count(e => e.Username == username) > 0;
+            return db.User.Count(e => e.Username == username) > 0;
         }
     }
 }

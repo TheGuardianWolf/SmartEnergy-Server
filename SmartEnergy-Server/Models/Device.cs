@@ -7,20 +7,21 @@ using System.Web;
 
 namespace SmartEnergy_Server.Models
 {
-    public class Data
+    public class Device
     {
         public int Id { get; set; }
 
-        public int DeviceId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        public DateTime Time { get; set; }
-
-        [Required]
-        public int Power { get; set; }
+        public string HardwareId { get; set; }
+        public string Alias { get; set; }
 
         [JsonIgnore]
-        public virtual Device Device { get; set; }
+        public virtual User User { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Data> Data { get; set; }
+
     }
 }

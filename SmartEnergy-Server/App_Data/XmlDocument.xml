@@ -486,37 +486,37 @@
             A set of endpoints relating to user data.
             </summary>
         </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUsers">
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUser">
             <summary>
             Get an object containing all users and their details.
             </summary>
         </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUsers(System.String)">
-            <summary>
-            Get details on specific user by username. Can be used for user validation.
-            </summary>
-        </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUsers(System.Int32)">
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUser(System.Int32)">
             <summary>
             Get details for user by user table ID.
             </summary>
         </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.PutUsers(System.Int32,SmartEnergy_Server.Models.Users)">
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUser(System.String)">
+            <summary>
+            Get details on specific user by username. Can be used for user validation.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.PutUser(System.Int32,SmartEnergy_Server.Models.User)">
             <summary>
             Modify user entry.
             </summary>
         </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.PostUsers(SmartEnergy_Server.Models.Users)">
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.PostUser(SmartEnergy_Server.Models.User)">
             <summary>
             Create a user.
             </summary>
         </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.DeleteUsers(System.Int32)">
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.DeleteUser(System.Int32)">
             <summary>
             Delete a user.
             </summary>
         </member>
-        <member name="T:SmartEnergy_Server.Models.Users">
+        <member name="T:SmartEnergy_Server.Models.User">
             <summary>
             A set of endpoints relating to user data.
             </summary>

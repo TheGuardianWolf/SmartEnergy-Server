@@ -17,16 +17,30 @@ namespace SmartEnergy_Server.Controllers
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
         // GET: api/Devices
-        public IQueryable<Devices> GetDevices()
+        public IQueryable<Device> GetDevice()
         {
-            return db.Devices;
+            return db.Device;
         }
 
         // GET: api/Devices/5
-        [ResponseType(typeof(Devices))]
-        public IHttpActionResult GetDevices(int id)
+        [ResponseType(typeof(Device))]
+        public IHttpActionResult GetDevice(int id)
         {
-            Devices devices = db.Devices.Find(id);
+            Device device = db.Device.Find(id);
+            if (device == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(device);
+        }
+
+        // GET: api/Devices/{HID\VID_1532&PID_011D&MI_01&Col01}
+        [Route("api/Devices/HardwareId/{hardwareId}")]
+        [ResponseType(typeof(Device))]
+        public IHttpActionResult GetDevicesByHardwareId(string hardwareId)
+        {
+            var devices = db.Devices.Where(i => i.HardwareId == hardwareId);
             if (devices == null)
             {
                 return NotFound();
@@ -37,19 +51,24 @@ namespace SmartEnergy_Server.Controllers
 
         // PUT: api/Devices/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutDevices(int id, Devices devices)
+        public IHttpActionResult PutDevice(int id, Device device)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != devices.Id)
+            if (id != device.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(devices).State = EntityState.Modified;
+            if (HardwareIdExists(device.HardwareId))
+            {
+                return BadRequest("Device already exists.");
+            }
+
+            db.Entry(device).State = EntityState.Modified;
 
             try
             {
@@ -57,9 +76,20 @@ namespace SmartEnergy_Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DevicesExists(id))
+                if (!DeviceExists(id))
                 {
                     return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                if (!UserExists(device.UserId))
+                {
+                    return BadRequest("Specified UserId must match an existing UserId.");
                 }
                 else
                 {
@@ -71,34 +101,55 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // POST: api/Devices
-        [ResponseType(typeof(Devices))]
-        public IHttpActionResult PostDevices(Devices devices)
+        [ResponseType(typeof(Device))]
+        public IHttpActionResult PostDevice(Device device)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Devices.Add(devices);
+            if (HardwareIdExists(device.HardwareId))
+            {
+                return BadRequest("Device already exists.");
+            }
+
+            db.Device.Add(device);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (!UserExists(device.UserId))
+                {
+                    return BadRequest("Specified UserId must match an existing UserId.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = devices.Id }, devices);
+            return CreatedAtRoute("DefaultApi", new { id = device.Id }, device);
         }
 
         // DELETE: api/Devices/5
-        [ResponseType(typeof(Devices))]
-        public IHttpActionResult DeleteDevices(int id)
+        [ResponseType(typeof(Device))]
+        public IHttpActionResult DeleteDevice(int id)
         {
-            Devices devices = db.Devices.Find(id);
-            if (devices == null)
+            Device device = db.Device.Find(id);
+            if (device == null)
             {
                 return NotFound();
             }
 
-            db.Devices.Remove(devices);
+            db.Device.Remove(device);
             db.SaveChanges();
 
-            return Ok(devices);
+            return Ok(device);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +161,19 @@ namespace SmartEnergy_Server.Controllers
             base.Dispose(disposing);
         }
 
-        private bool DevicesExists(int id)
+        private bool UserExists(int id)
         {
-            return db.Devices.Count(e => e.Id == id) > 0;
+            return db.User.Count(e => e.Id == id) > 0;
+        }
+
+        private bool DeviceExists(int id)
+        {
+            return db.Device.Count(e => e.Id == id) > 0;
+        }
+
+        private bool HardwareIdExists(string hardwareId)
+        {
+            return db.Device.Count(e => e.HardwareId == hardwareId) > 0;
         }
     }
 }
