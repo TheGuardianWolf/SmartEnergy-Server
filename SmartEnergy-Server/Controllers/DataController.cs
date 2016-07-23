@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using SmartEnergy_Server.Models;
+using System.Web.Http.OData;
 
 namespace SmartEnergy_Server.Controllers
 {
@@ -22,26 +23,20 @@ namespace SmartEnergy_Server.Controllers
             return db.Data;
         }
 
+        // GET: api/Data/Device/5
+        [Route("api/Data/Device/{deviceId}")]
+        [EnableQueryAttribute]
+        [ResponseType(typeof(Data))]
+        public IQueryable<Data> GetDataByDeviceId(int deviceId)
+        {
+            return db.Data.Where(i => i.DeviceId == deviceId);
+        }
+
         // GET: api/Data/5
         [ResponseType(typeof(Data))]
         public IHttpActionResult GetData(int id)
         {
             Data data = db.Data.Find(id);
-            if (data == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(data);
-        }
-
-        // GET: api/Data/Device/5
-        [Route("api/Data/Device/{deviceId}")]
-        [ResponseType(typeof(Data))]
-        public IHttpActionResult GetDataByDeviceId(int deviceId)
-        {
-            var data = db.Data.Where(i => i.DeviceId == deviceId);
-
             if (data == null)
             {
                 return NotFound();
@@ -64,8 +59,6 @@ namespace SmartEnergy_Server.Controllers
                 return BadRequest();
             }
 
-            // TODO: Input should contain nested JSON object for time and power which is looped over and inserted to DB
-
             db.Entry(data).State = EntityState.Modified;
 
             try
@@ -83,10 +76,22 @@ namespace SmartEnergy_Server.Controllers
                     throw;
                 }
             }
+            catch (DbUpdateException)
+            {
+                if (!DeviceExists(data.DeviceId))
+                {
+                    return BadRequest("Specified DeviceId must match an existing DeviceId.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // README: Use batch requests to submit multiple
         // POST: api/Data
         [ResponseType(typeof(Data))]
         public IHttpActionResult PostData(Data data)
@@ -97,7 +102,22 @@ namespace SmartEnergy_Server.Controllers
             }
 
             db.Data.Add(data);
-            db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (!DeviceExists(data.DeviceId))
+                {
+                    return BadRequest("Specified DeviceId must match an existing DeviceId.");
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return CreatedAtRoute("DefaultApi", new { id = data.Id }, data);
         }
@@ -127,14 +147,14 @@ namespace SmartEnergy_Server.Controllers
             base.Dispose(disposing);
         }
 
+        private bool DeviceExists(int id)
+        {
+            return db.Device.Count(e => e.Id == id) > 0;
+        }
+
         private bool DataExists(int id)
         {
             return db.Data.Count(e => e.Id == id) > 0;
-        }
-
-        private bool TimeExists(DateTime time)
-        {
-            return db.Data.Count(e => e.Time == time) > 0;
         }
     }
 }

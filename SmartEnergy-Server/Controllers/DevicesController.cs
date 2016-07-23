@@ -131,7 +131,6 @@ namespace SmartEnergy_Server.Controllers
                     throw;
                 }
             }
-            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = device.Id }, device);
         }

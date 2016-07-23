@@ -22,6 +22,12 @@ namespace SmartEnergy_Server
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpBatchRoute(
+                routeName: "batch",
+                routeTemplate: "api/batch",
+                batchHandler: new HttpBatchHandler(GlobalConfiguration.DefaultServer)
+            );
         }
     }
 }
