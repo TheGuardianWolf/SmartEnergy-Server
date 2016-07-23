@@ -19,29 +19,13 @@ namespace SmartEnergy_Server.Controllers
     {
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
-        //// GET: api/Users
-        ///// <summary>
-        ///// Get an object containing all users and their details.
-        ///// </summary>
-        //public IQueryable<Users> GetUsers()
-        //{
-        //    return db.Users;
-        //}
-
-        // GET: api/Users/Username
+        // GET: api/Users
         /// <summary>
-        /// Get details on specific user by username. Can be used for user validation.
+        /// Get an object containing all users and their details.
         /// </summary>
-        [ResponseType(typeof(Users))]
-        public IHttpActionResult GetUsers(string username)
+        public IQueryable<Users> GetUsers()
         {
-            var users = db.Users.Where(i => i.Username == username);
-            if (users == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(users);
+            return db.Users;
         }
 
         // GET: api/Users/5
@@ -99,6 +83,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // POST: api/Users
+        /// <summary>
+        /// Create a user.
+        /// </summary>
         [ResponseType(typeof(Users))]
         public IHttpActionResult PostUsers(Users users)
         {
@@ -107,9 +94,7 @@ namespace SmartEnergy_Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var existingUsers = db.Users.Where(i => i.Username == users.Username);
-
-            if (existingUsers != null)
+            if (UsernameExists(users.Username))
             {
                 return BadRequest("User already exists.");
             }
@@ -121,6 +106,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // DELETE: api/Users/5
+        /// <summary>
+        /// Delete a user.
+        /// </summary>
         [ResponseType(typeof(Users))]
         public IHttpActionResult DeleteUsers(int id)
         {
@@ -132,6 +120,23 @@ namespace SmartEnergy_Server.Controllers
 
             db.Users.Remove(users);
             db.SaveChanges();
+
+            return Ok(users);
+        }
+
+        // GET: api/Users/Username
+        /// <summary>
+        /// Get details on specific user by username. Can be used for user validation.
+        /// </summary>
+        [Route("api/Users/{username}")]
+        [ResponseType(typeof(Users))]
+        public IHttpActionResult GetUsers(string username)
+        {
+            var users = db.Users.Where(i => i.Username == username);
+            if (users == null)
+            {
+                return NotFound();
+            }
 
             return Ok(users);
         }
@@ -148,6 +153,11 @@ namespace SmartEnergy_Server.Controllers
         private bool UsersExists(int id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
+        }
+
+        private bool UsernameExists(string username)
+        {
+            return db.Users.Count(e => e.Username == username) > 0;
         }
     }
 }
