@@ -17,7 +17,7 @@ namespace SmartEnergy_Server.Controllers
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
         // GET: api/Devices
-        public IQueryable<Device> GetDevice()
+        private IQueryable<Device> GetDevice()
         {
             return db.Device;
         }
@@ -35,12 +35,12 @@ namespace SmartEnergy_Server.Controllers
             return Ok(device);
         }
 
-        // GET: api/Devices/{HID\VID_1532&PID_011D&MI_01&Col01}
-        [Route("api/Devices/HardwareId/{hardwareId}")]
+        // GET: api/Devices/User/
+        [Route("api/Devices/User/{userId}")]
         [ResponseType(typeof(Device))]
-        public IHttpActionResult GetDevicesByHardwareId(string hardwareId)
+        public IHttpActionResult GetDevicesByUserId(int userId)
         {
-            var devices = db.Devices.Where(i => i.HardwareId == hardwareId);
+            var devices = db.Devices.Where(i => i.UserId == userId);
             if (devices == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace SmartEnergy_Server.Controllers
 
         // DELETE: api/Devices/5
         [ResponseType(typeof(Device))]
-        public IHttpActionResult DeleteDevice(int id)
+        private IHttpActionResult DeleteDevice(int id)
         {
             Device device = db.Device.Find(id);
             if (device == null)

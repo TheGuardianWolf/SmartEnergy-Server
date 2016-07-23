@@ -18,7 +18,7 @@ namespace SmartEnergy_Server.Controllers
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
         // GET: api/Data
-        public IQueryable<Data> GetData()
+        private IQueryable<Data> GetData()
         {
             return db.Data;
         }
@@ -91,7 +91,7 @@ namespace SmartEnergy_Server.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // README: Use batch requests to submit multiple
+        // TIP: Use batch requests to submit multiple
         // POST: api/Data
         [ResponseType(typeof(Data))]
         public IHttpActionResult PostData(Data data)
@@ -124,7 +124,7 @@ namespace SmartEnergy_Server.Controllers
 
         // DELETE: api/Data/5
         [ResponseType(typeof(Data))]
-        public IHttpActionResult DeleteData(int id)
+        private IHttpActionResult DeleteData(int id)
         {
             Data data = db.Data.Find(id);
             if (data == null)

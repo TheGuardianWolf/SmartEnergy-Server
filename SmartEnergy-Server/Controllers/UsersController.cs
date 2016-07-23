@@ -132,7 +132,7 @@ namespace SmartEnergy_Server.Controllers
         /// Delete a user.
         /// </summary>
         [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
+        private IHttpActionResult DeleteUser(int id)
         {
             User users = db.User.Find(id);
             if (users == null)
