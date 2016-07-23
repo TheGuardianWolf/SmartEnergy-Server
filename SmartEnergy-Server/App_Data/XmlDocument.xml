@@ -486,9 +486,19 @@
             A set of endpoints relating to user data.
             </summary>
         </member>
-        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUsers">
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUsers(System.String)">
             <summary>
-            Gets a list of users.
+            Get details on specific user by username. Can be used for user validation.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.GetUsers(System.Int32)">
+            <summary>
+            Get details for user by user table ID.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.UsersController.PutUsers(System.Int32,SmartEnergy_Server.Models.Users)">
+            <summary>
+            Modify user entry.
             </summary>
         </member>
         <member name="T:SmartEnergy_Server.Models.Users">

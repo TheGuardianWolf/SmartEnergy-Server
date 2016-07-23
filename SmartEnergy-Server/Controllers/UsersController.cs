@@ -19,16 +19,35 @@ namespace SmartEnergy_Server.Controllers
     {
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
+        //// GET: api/Users
+        ///// <summary>
+        ///// Get an object containing all users and their details.
+        ///// </summary>
+        //public IQueryable<Users> GetUsers()
+        //{
+        //    return db.Users;
+        //}
+
+        // GET: api/Users/Username
         /// <summary>
-        /// Gets a list of users.
+        /// Get details on specific user by username. Can be used for user validation.
         /// </summary>
-        // GET: api/Users
-        public IQueryable<Users> GetUsers()
+        [ResponseType(typeof(Users))]
+        public IHttpActionResult GetUsers(string username)
         {
-            return db.Users;
+            var users = db.Users.Where(i => i.Username == username);
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(users);
         }
 
         // GET: api/Users/5
+        /// <summary>
+        /// Get details for user by user table ID.
+        /// </summary>
         [ResponseType(typeof(Users))]
         public IHttpActionResult GetUsers(int id)
         {
@@ -42,6 +61,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // PUT: api/Users/5
+        /// <summary>
+        /// Modify user entry.
+        /// </summary>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsers(int id, Users users)
         {
@@ -83,6 +105,13 @@ namespace SmartEnergy_Server.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            var existingUsers = db.Users.Where(i => i.Username == users.Username);
+
+            if (existingUsers != null)
+            {
+                return BadRequest("User already exists.");
             }
 
             db.Users.Add(users);
