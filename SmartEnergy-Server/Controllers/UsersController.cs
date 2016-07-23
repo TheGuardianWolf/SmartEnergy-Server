@@ -23,7 +23,7 @@ namespace SmartEnergy_Server.Controllers
         /// <summary>
         /// Get an object containing all users and their details.
         /// </summary>
-        public IQueryable<User> GetUser()
+        private IQueryable<User> GetUser()
         {
             return db.User;
         }
