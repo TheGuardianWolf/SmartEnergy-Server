@@ -51,14 +51,13 @@ namespace SmartEnergy_Server.Controllers
         [Route("api/Users/Username/{username}")]
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(string username)
-        {
-            var users = db.User.Where(i => i.Username == username);
-            if (users == null)
+        {    
+            if (!UsernameExists(username))
             {
                 return NotFound();
             }
 
-            return Ok(users);
+            return Ok(db.User.Where(i => i.Username == username));
         }
 
         // PUT: api/Users/5

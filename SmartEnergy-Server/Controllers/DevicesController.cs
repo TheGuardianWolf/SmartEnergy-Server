@@ -40,13 +40,12 @@ namespace SmartEnergy_Server.Controllers
         [ResponseType(typeof(Device))]
         public IHttpActionResult GetDevicesByUserId(int userId)
         {
-            var devices = db.Devices.Where(i => i.UserId == userId);
-            if (devices == null)
+            if (UserIdExists(userId))
             {
                 return NotFound();
             }
 
-            return Ok(devices);
+            return Ok(db.Devices.Where(i => i.UserId == userId));
         }
 
         // PUT: api/Devices/5
@@ -87,7 +86,7 @@ namespace SmartEnergy_Server.Controllers
             }
             catch (DbUpdateException)
             {
-                if (!UserExists(device.UserId))
+                if (!UserIdExists(device.UserId))
                 {
                     return BadRequest("Specified UserId must match an existing UserId.");
                 }
@@ -122,7 +121,7 @@ namespace SmartEnergy_Server.Controllers
             }
             catch (DbUpdateException)
             {
-                if (!UserExists(device.UserId))
+                if (!UserIdExists(device.UserId))
                 {
                     return BadRequest("Specified UserId must match an existing UserId.");
                 }
@@ -160,14 +159,14 @@ namespace SmartEnergy_Server.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
-        {
-            return db.User.Count(e => e.Id == id) > 0;
-        }
-
         private bool DeviceExists(int id)
         {
             return db.Device.Count(e => e.Id == id) > 0;
+        }
+
+        private bool UserIdExists(int id)
+        {
+            return db.User.Count(e => e.Id == id) > 0;
         }
 
         private bool HardwareIdExists(string hardwareId)
