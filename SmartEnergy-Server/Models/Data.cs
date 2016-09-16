@@ -18,7 +18,10 @@ namespace SmartEnergy_Server.Models
         public DateTime Time { get; set; }
 
         [Required]
-        public int Power { get; set; }
+        public string Label { get; set; }
+
+        [Required]
+        public int Value { get; set; }
 
         [JsonIgnore]
         public virtual Device Device { get; set; }
