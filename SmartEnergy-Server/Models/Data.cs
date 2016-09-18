@@ -21,7 +21,7 @@ namespace SmartEnergy_Server.Models
         public string Label { get; set; }
 
         [Required]
-        public int Value { get; set; }
+        public decimal Value { get; set; }
 
         [JsonIgnore]
         public virtual Device Device { get; set; }
