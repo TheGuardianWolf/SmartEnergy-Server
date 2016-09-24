@@ -45,7 +45,7 @@ namespace SmartEnergy_Server.Controllers
                 return NotFound();     
             }
 
-            return Ok(db.Devices.Where(i => i.UserId == userId));
+            return Ok(db.Device.Where(i => i.UserId == userId));
         }
 
         // PUT: api/Devices/5
