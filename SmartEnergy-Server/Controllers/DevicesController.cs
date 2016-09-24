@@ -40,9 +40,9 @@ namespace SmartEnergy_Server.Controllers
         [ResponseType(typeof(Device))]
         public IHttpActionResult GetDevicesByUserId(int userId)
         {
-            if (UserIdExists(userId))
+            if (!UserIdExists(userId))
             {
-                return NotFound();
+                return NotFound();     
             }
 
             return Ok(db.Devices.Where(i => i.UserId == userId));
@@ -73,7 +73,7 @@ namespace SmartEnergy_Server.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
                 if (!DeviceExists(id))
                 {
@@ -81,10 +81,10 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
                 if (!UserIdExists(device.UserId))
                 {
@@ -92,7 +92,7 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 
@@ -119,7 +119,7 @@ namespace SmartEnergy_Server.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
                 if (!UserIdExists(device.UserId))
                 {
@@ -127,7 +127,7 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 
@@ -136,7 +136,7 @@ namespace SmartEnergy_Server.Controllers
 
         // DELETE: api/Devices/5
         [ResponseType(typeof(Device))]
-        private IHttpActionResult DeleteDevice(int id)
+        public IHttpActionResult DeleteDevice(int id)
         {
             Device device = db.Device.Find(id);
             if (device == null)

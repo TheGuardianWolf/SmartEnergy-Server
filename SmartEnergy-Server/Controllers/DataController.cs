@@ -65,7 +65,7 @@ namespace SmartEnergy_Server.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
                 if (!DataExists(id))
                 {
@@ -73,10 +73,10 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
                 if (!DeviceExists(data.DeviceId))
                 {
@@ -84,7 +84,7 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 
@@ -107,7 +107,7 @@ namespace SmartEnergy_Server.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException e)
             {
                 if (!DeviceExists(data.DeviceId))
                 {
@@ -115,7 +115,7 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 

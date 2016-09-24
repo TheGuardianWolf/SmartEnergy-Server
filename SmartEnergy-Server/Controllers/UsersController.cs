@@ -88,7 +88,7 @@ namespace SmartEnergy_Server.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException e)
             {
                 if (!UserExists(id))
                 {
@@ -96,7 +96,7 @@ namespace SmartEnergy_Server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw e;
                 }
             }
 
