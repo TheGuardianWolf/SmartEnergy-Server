@@ -11,6 +11,7 @@ namespace SmartEnergy_Server.Models
     {
         public int Id { get; set; }
 
+        [Required]
         public int DeviceId { get; set; }
 
         [Required]

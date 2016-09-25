@@ -15,6 +15,7 @@ namespace SmartEnergy_Server.Models
         public int Id { get; set; }
 
         [Required]
+        [RegularExpression(@"^(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")]
         public string Username { get; set; }
 
         [JsonIgnore]
