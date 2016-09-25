@@ -25,14 +25,21 @@ namespace SmartEnergy_Server.Models
         {
             public DbConfiguration()
             {
-                this.AutomaticMigrationsEnabled = true;
-                this.AutomaticMigrationDataLossAllowed = true;
+                AutomaticMigrationsEnabled = true;
+                AutomaticMigrationDataLossAllowed = true;
             }
         }
 
-        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.User> User { get; set; }
-        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.Device> Device { get; set; }
-        public System.Data.Entity.DbSet<SmartEnergy_Server.Models.Data> Data { get; set; }
-        public IQueryable<Device> Devices { get; internal set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Data>().Property(Data => Data.Value).HasPrecision(12, 10);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<User> User { get; set; }
+        public DbSet<Device> Device { get; set; }
+        public DbSet<Data> Data { get; set; }
+        // public IQueryable<Device> Devices { get; internal set; }
     }
 }
