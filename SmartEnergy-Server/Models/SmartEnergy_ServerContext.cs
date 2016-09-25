@@ -32,7 +32,7 @@ namespace SmartEnergy_Server.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Data>().Property(Data => Data.Value).HasPrecision(12, 10);
+            modelBuilder.Entity<Data>().Property(Data => Data.Value).HasPrecision(18, 5);
 
             base.OnModelCreating(modelBuilder);
         }

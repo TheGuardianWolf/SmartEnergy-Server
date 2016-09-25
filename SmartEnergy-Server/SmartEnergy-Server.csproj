@@ -163,7 +163,6 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -206,7 +205,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\201609250511187_EF Data.Value precision increase.cs" />
+    <Compile Include="Migrations\201609250511187_EF Data.Value precision increase.Designer.cs">
+      <DependentUpon>201609250511187_EF Data.Value precision increase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\SmartEnergy_ServerContext.cs" />
@@ -278,7 +280,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609250511187_EF Data.Value precision increase.resx">
+      <DependentUpon>201609250511187_EF Data.Value precision increase.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
