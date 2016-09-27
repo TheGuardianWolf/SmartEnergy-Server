@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Web;
 
 namespace SmartEnergy_Server.Models
 {
@@ -15,10 +11,11 @@ namespace SmartEnergy_Server.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
         public SmartEnergy_ServerContext() : base("name=SmartEnergy_ServerContext")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SmartEnergy_ServerContext, DbConfiguration>());
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public class DbConfiguration : DbMigrationsConfiguration<SmartEnergy_ServerContext>
