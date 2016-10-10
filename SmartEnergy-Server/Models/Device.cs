@@ -17,6 +17,9 @@ namespace SmartEnergy_Server.Models
         [DataMember]
         [Required]
         public string HardwareId { get; set; }
+
+        [DataMember]
+        [Required]
         public string Alias { get; set; }
 
         public virtual User User { get; set; }
