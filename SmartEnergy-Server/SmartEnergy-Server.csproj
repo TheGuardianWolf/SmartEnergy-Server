@@ -205,10 +205,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609250511187_EF Data.Value precision increase.cs" />
-    <Compile Include="Migrations\201609250511187_EF Data.Value precision increase.Designer.cs">
-      <DependentUpon>201609250511187_EF Data.Value precision increase.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\SmartEnergy_ServerContext.cs" />
