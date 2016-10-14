@@ -521,5 +521,20 @@
             A set of endpoints relating to user data.
             </summary>
         </member>
+        <member name="P:SmartEnergy_Server.Models.User.Id">
+            <summary>
+            The user ID.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.User.Username">
+            <summary>
+            The username for the user.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.User.Device">
+            <summary>
+            The devices the user has.
+            </summary>
+        </member>
     </members>
 </doc>
