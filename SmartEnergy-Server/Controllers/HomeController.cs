@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace SmartEnergy_Server.Controllers
 {
+	/// <summary>
+    /// A set of endpoints relating to home data.
+    /// </summary>
     public class HomeController : Controller
     {
         public ActionResult Index()

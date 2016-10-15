@@ -12,17 +12,26 @@ using SmartEnergy_Server.Models;
 
 namespace SmartEnergy_Server.Controllers
 {
+	/// <summary>
+    /// A set of endpoints relating to device data.
+    /// </summary>
     public class DevicesController : ApiController
     {
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
         // GET: api/Devices
+		/// <summary>
+		/// Get an object containing all devices and their details.
+		/// </summary>
         private IQueryable<Device> GetDevice()
         {
             return db.Device;
         }
 
         // GET: api/Devices/5
+		/// <summary>
+		/// Get details for device by device table ID.
+		/// </summary>
         [ResponseType(typeof(Device))]
         public IHttpActionResult GetDevice(int id)
         {
@@ -36,6 +45,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // GET: api/Devices/User/
+		/// <summary>
+		/// Get details on specific device by userID. Can be used for device validation.
+		/// </summary>
         [Route("api/Devices/User/{userId}")]
         [ResponseType(typeof(Device))]
         public IHttpActionResult GetDevicesByUserId(int userId)
@@ -49,6 +61,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // PUT: api/Devices/5
+		/// <summary>
+		/// Modify device entry.
+		/// </summary>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutDevice(int id, Device device)
         {
@@ -100,6 +115,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // POST: api/Devices
+		/// <summary>
+		/// Create a device.
+		/// </summary>
         [ResponseType(typeof(Device))]
         public IHttpActionResult PostDevice(Device device)
         {
@@ -135,6 +153,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // DELETE: api/Devices/5
+		/// <summary>
+		/// Delete a device.
+		/// </summary>
         [ResponseType(typeof(Device))]
         public IHttpActionResult DeleteDevice(int id)
         {

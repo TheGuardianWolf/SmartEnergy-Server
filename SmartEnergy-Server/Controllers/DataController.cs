@@ -13,17 +13,26 @@ using System.Web.Http.OData;
 
 namespace SmartEnergy_Server.Controllers
 {
+	/// <summary>
+    /// A set of endpoints relating to data.
+    /// </summary>
     public class DataController : ApiController
     {
         private SmartEnergy_ServerContext db = new SmartEnergy_ServerContext();
 
         // GET: api/Data
+		/// <summary>
+		/// Get an object containing all data.
+		/// </summary>
         private IQueryable<Data> GetData()
         {
             return db.Data;
         }
 
         // GET: api/Data/Device/5
+		/// <summary>
+		/// Get details for data by device ID.
+		/// </summary>
         [Route("api/Data/Device/{deviceId}")]
         [EnableQueryAttribute]
         [ResponseType(typeof(Data))]
@@ -33,6 +42,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // GET: api/Data/5
+		/// <summary>
+		/// Get details for data by data table ID.
+		/// </summary>
         [ResponseType(typeof(Data))]
         public IHttpActionResult GetData(int id)
         {
@@ -46,6 +58,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // PUT: api/Data/5
+		/// <summary>
+		/// /// Modify data entry.
+		/// </summary>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutData(int id, Data data)
         {
@@ -93,6 +108,9 @@ namespace SmartEnergy_Server.Controllers
 
         // TIP: Use batch requests to submit multiple
         // POST: api/Data
+		/// <summary>
+		/// Create data.
+		/// </summary>
         [ResponseType(typeof(Data))]
         public IHttpActionResult PostData(Data data)
         {
@@ -123,6 +141,9 @@ namespace SmartEnergy_Server.Controllers
         }
 
         // DELETE: api/Data/5
+		/// <summary>
+		/// Delete data.
+		/// </summary>
         [ResponseType(typeof(Data))]
         private IHttpActionResult DeleteData(int id)
         {
