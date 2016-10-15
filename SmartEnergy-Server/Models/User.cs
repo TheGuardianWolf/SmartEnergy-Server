@@ -29,6 +29,9 @@ namespace SmartEnergy_Server.Models
         /// </summary>
         public ICollection<Device> Device { get; set; }
 
+		/// <summary>
+        /// The data the user has.
+        /// </summary>
         public ICollection<Data> Data { get; set; }
     }
 }
