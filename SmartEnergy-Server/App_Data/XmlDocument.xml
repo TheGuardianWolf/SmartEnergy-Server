@@ -481,6 +481,81 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:SmartEnergy_Server.Controllers.DataController">
+            <summary>
+            A set of endpoints relating to data.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DataController.GetData">
+            <summary>
+            Get an object containing all data.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DataController.GetDataByDeviceId(System.Int32)">
+            <summary>
+            Get details for data by device ID.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DataController.GetData(System.Int32)">
+            <summary>
+            Get details for data by data table ID.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DataController.PutData(System.Int32,SmartEnergy_Server.Models.Data)">
+            <summary>
+            /// Modify data entry.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DataController.PostData(SmartEnergy_Server.Models.Data)">
+            <summary>
+            Create data.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DataController.DeleteData(System.Int32)">
+            <summary>
+            Delete data.
+            </summary>
+        </member>
+        <member name="T:SmartEnergy_Server.Controllers.DevicesController">
+            <summary>
+            A set of endpoints relating to device data.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DevicesController.GetDevice">
+            <summary>
+            Get an object containing all devices and their details.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DevicesController.GetDevice(System.Int32)">
+            <summary>
+            Get details for device by device table ID.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DevicesController.GetDevicesByUserId(System.Int32)">
+            <summary>
+            Get details on specific device by userID. Can be used for device validation.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DevicesController.PutDevice(System.Int32,SmartEnergy_Server.Models.Device)">
+            <summary>
+            Modify device entry.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DevicesController.PostDevice(SmartEnergy_Server.Models.Device)">
+            <summary>
+            Create a device.
+            </summary>
+        </member>
+        <member name="M:SmartEnergy_Server.Controllers.DevicesController.DeleteDevice(System.Int32)">
+            <summary>
+            Delete a device.
+            </summary>
+        </member>
+        <member name="T:SmartEnergy_Server.Controllers.HomeController">
+            <summary>
+            Controller for the home page of the server.
+            </summary>
+        </member>
         <member name="T:SmartEnergy_Server.Controllers.UsersController">
             <summary>
             A set of endpoints relating to user data.
@@ -516,6 +591,76 @@
             Delete a user.
             </summary>
         </member>
+        <member name="T:SmartEnergy_Server.Models.Data">
+            <summary>
+            A set of endpoints relating to data.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Data.Id">
+            <summary>
+            The data ID.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Data.DeviceId">
+            <summary>
+            The deviceID the data has.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Data.Time">
+            <summary>
+            The date and time the data was collected.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Data.Label">
+            <summary>
+            The label for the data.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Data.Value">
+            <summary>
+            The value of the data.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Data.Device">
+            <summary>
+            The device the data is coming from.
+            </summary>
+        </member>
+        <member name="T:SmartEnergy_Server.Models.Device">
+            <summary>
+            A set of endpoints relating to device data.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Device.Id">
+            <summary>
+            The device ID.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Device.UserId">
+            <summary>
+            The userID for the device.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Device.HardwareId">
+            <summary>
+            This is a permanent ID associated with the device hardware.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Device.Alias">
+            <summary>
+            The name of the device.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Device.User">
+            <summary>
+            The user associated with the device.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.Device.Data">
+            <summary>
+            The data the device has.
+            </summary>
+        </member>
         <member name="T:SmartEnergy_Server.Models.User">
             <summary>
             A set of endpoints relating to user data.
@@ -534,6 +679,11 @@
         <member name="P:SmartEnergy_Server.Models.User.Device">
             <summary>
             The devices the user has.
+            </summary>
+        </member>
+        <member name="P:SmartEnergy_Server.Models.User.Data">
+            <summary>
+            The data the user has.
             </summary>
         </member>
     </members>

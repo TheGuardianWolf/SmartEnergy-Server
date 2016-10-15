@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace SmartEnergy_Server.Controllers
 {
 	/// <summary>
-    /// A set of endpoints relating to home data.
+    /// Controller for the home page of the server.
     /// </summary>
     public class HomeController : Controller
     {

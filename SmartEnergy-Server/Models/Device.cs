@@ -4,45 +4,45 @@ using System.Runtime.Serialization;
 
 namespace SmartEnergy_Server.Models
 {
-	/// <summary>
+    /// <summary>
     /// A set of endpoints relating to device data.
     /// </summary>
     [DataContract]
     public class Device
     {
-		/// <summary>
+        /// <summary>
         /// The device ID.
         /// </summary>
         [DataMember]
         public int Id { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The userID for the device.
         /// </summary>
         [DataMember]
         [Required]
         public int UserId { get; set; }
 
-		/// <summary>
-        /// The hardwareID for the device.
+        /// <summary>
+        /// This is a permanent ID associated with the device hardware.
         /// </summary>
         [DataMember]
         [Required]
         public string HardwareId { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The name of the device.
         /// </summary>
         [DataMember]
         [Required]
         public string Alias { get; set; }
 
-		/// <summary>
-        /// The user of the device.
+        /// <summary>
+        /// The user associated with the device.
         /// </summary>
         public virtual User User { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The data the device has.
         /// </summary>
         public ICollection<Data> Data { get; set; }

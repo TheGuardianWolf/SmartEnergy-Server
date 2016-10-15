@@ -23,13 +23,13 @@ namespace SmartEnergy_Server.Models
         [Required]
         [RegularExpression(@"^(?!.*[._-]{2})[a-z][a-z0-9._-]*[a-z0-9]$")]
         public string Username { get; set; }
-        
+
         /// <summary>
         /// The devices the user has.
         /// </summary>
         public ICollection<Device> Device { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// The data the user has.
         /// </summary>
         public ICollection<Data> Data { get; set; }

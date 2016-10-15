@@ -2,13 +2,13 @@
 
 SmartEnergy Server provides an API for data storage and retrieval capablities.
 
-## Installation
+## Build
 
-TODO: Describe the installation process
+Requires Visual Studio.
 
-## Usage
+## Use
 
-TODO: Write usage instructions
+Host on a Windows Server with IIS or the Microsoft Azure platform.
 
 ## Contributing
 
@@ -24,12 +24,12 @@ TODO: Write usage instructions
 
 ## Credits
 
-Authored by Jerry Fan.
+Authored by Jerry Fan in collaboration with Hyeyun Jeong.
 
 ## License
 
 SmartEnergy-Server, an API endpoint and database framework for the SmartEnergy device.
-Copyright (C) 2016  Jerry Fan
+Copyright (C) 2016 Jerry Fan, Hyeyun Jeong
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
