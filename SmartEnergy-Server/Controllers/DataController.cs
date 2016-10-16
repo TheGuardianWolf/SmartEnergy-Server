@@ -59,7 +59,7 @@ namespace SmartEnergy_Server.Controllers
 
         // PUT: api/Data/5
         /// <summary>
-        /// /// Modify data entry.
+        /// Modify data entry.
         /// </summary>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutData(int id, Data data)
