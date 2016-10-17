@@ -503,7 +503,7 @@
         </member>
         <member name="M:SmartEnergy_Server.Controllers.DataController.PutData(System.Int32,SmartEnergy_Server.Models.Data)">
             <summary>
-            /// Modify data entry.
+            Modify data entry.
             </summary>
         </member>
         <member name="M:SmartEnergy_Server.Controllers.DataController.PostData(SmartEnergy_Server.Models.Data)">
