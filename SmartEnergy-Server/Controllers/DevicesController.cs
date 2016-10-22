@@ -77,7 +77,7 @@ namespace SmartEnergy_Server.Controllers
                 return BadRequest();
             }
 
-            if (HardwareIdExists(device.HardwareId))
+            if (HardwareIdExists(device.Id, device.HardwareId))
             {
                 return BadRequest("Device already exists.");
             }
@@ -193,6 +193,11 @@ namespace SmartEnergy_Server.Controllers
         private bool HardwareIdExists(string hardwareId)
         {
             return db.Device.Count(e => e.HardwareId == hardwareId) > 0;
+        }
+
+        private bool HardwareIdExists(int id, string hardwareId)
+        {
+            return db.Device.Count(e => (e.Id != id && e.HardwareId == hardwareId)) > 0;
         }
     }
 }

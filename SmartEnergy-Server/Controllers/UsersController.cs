@@ -77,7 +77,7 @@ namespace SmartEnergy_Server.Controllers
                 return BadRequest();
             }
 
-            if (UsernameExists(user.Username))
+            if (UsernameExists(user.Id, user.Username))
             {
                 return BadRequest("User already exists.");
             }
@@ -162,6 +162,11 @@ namespace SmartEnergy_Server.Controllers
         private bool UsernameExists(string username)
         {
             return db.User.Count(e => e.Username == username) > 0;
+        }
+
+        private bool UsernameExists(int id, string username)
+        {
+            return db.User.Count(e => (e.Id != id && e.Username == username)) > 0;
         }
     }
 }
